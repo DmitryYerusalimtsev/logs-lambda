@@ -1,2 +1,2 @@
 # logs-lambda
-Sample implementataion of Lambda architecture.
+Sample implementation of Lambda architecture.

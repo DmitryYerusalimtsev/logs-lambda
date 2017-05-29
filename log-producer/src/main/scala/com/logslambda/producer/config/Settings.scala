@@ -1,4 +1,4 @@
-package com.logslambda.config
+package com.logslambda.producer.config
 
 import com.typesafe.config.ConfigFactory
 

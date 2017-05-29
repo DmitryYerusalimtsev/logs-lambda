@@ -1,6 +1,6 @@
-package com.logslambda.stream
+package com.logslambda.producer.stream
 
-import com.logslambda.config.Settings
+import com.logslambda.producer.config.Settings
 
 import scala.io.Source
 

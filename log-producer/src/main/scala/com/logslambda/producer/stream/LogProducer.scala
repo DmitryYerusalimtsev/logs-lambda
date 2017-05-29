@@ -1,7 +1,9 @@
-package com.logslambda.stream
+package com.logslambda.producer.stream
 
 import java.io.FileWriter
-import com.logslambda.config.Settings
+
+import com.logslambda.producer.config.Settings
+
 import scala.util.Random
 
 object LogProducer extends App {

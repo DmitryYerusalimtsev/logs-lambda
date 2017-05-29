@@ -4,12 +4,17 @@
     <option name="linkedExternalProjectsSettings">
       <SbtProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="jdk" value="1.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/batch" />
+            <option value="$PROJECT_DIR$/batch/project" />
             <option value="$PROJECT_DIR$/log-producer" />
             <option value="$PROJECT_DIR$/log-producer/project" />
             <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils/project" />
           </set>
         </option>
         <option name="sbtVersion" value="0.13.15" />

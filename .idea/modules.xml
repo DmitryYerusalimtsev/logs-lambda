@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/batch/batch.iml" filepath="$PROJECT_DIR$/batch/batch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/batch-build.iml" filepath="$PROJECT_DIR$/.idea/modules/batch-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logProducer.iml" filepath="$PROJECT_DIR$/.idea/modules/logProducer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logProducer-build.iml" filepath="$PROJECT_DIR$/.idea/modules/logProducer-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logs-lambda.iml" filepath="$PROJECT_DIR$/.idea/modules/logs-lambda.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logs-lambda-build.iml" filepath="$PROJECT_DIR$/.idea/modules/logs-lambda-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils-build.iml" filepath="$PROJECT_DIR$/.idea/modules/utils-build.iml" />
     </modules>
   </component>
 </project>

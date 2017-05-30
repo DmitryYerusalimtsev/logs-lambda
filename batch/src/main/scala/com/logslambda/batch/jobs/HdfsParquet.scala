@@ -2,15 +2,11 @@ package com.logslambda.batch.jobs
 
 import org.apache.spark.sql.{DataFrame, SaveMode}
 
-trait HdfsParquet[T <: DataFrame] {
+trait HdfsParquet {
 
-  private var df: DataFrame = null
+  def partitionColumn: String
 
-  implicit def fromDF(otherDf: DataFrame) = {
-    df = otherDf
-  }
-
-  def save(implicit path: String) = {
-    df.write.mode(SaveMode.Append).parquet(path)
+  def save(df: DataFrame, path: String) = {
+    df.write.partitionBy(partitionColumn).mode(SaveMode.Append).parquet(path)
   }
 }

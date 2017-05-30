@@ -38,3 +38,19 @@ lazy val batch = (project in file("batch"))
       "com.typesafe" % "config" % "1.3.1"
     )
   ).dependsOn(utils)
+
+
+assemblyMergeStrategy in assembly := {
+  case x if x.contains(".class") => MergeStrategy.last
+  case x if x.endsWith(".properties") => MergeStrategy.last
+  case x if x.contains("/resources/") => MergeStrategy.last
+  case x if x.startsWith("META-INF/mailcap") => MergeStrategy.last
+  case x if x.startsWith("META-INF/mimetypes.default") => MergeStrategy.first
+  case x if x.startsWith("META-INF/maven/org.slf4j/slf4j-api/pom.") => MergeStrategy.first
+  case x =>
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    if (oldStrategy == MergeStrategy.deduplicate)
+      MergeStrategy.first
+    else
+      oldStrategy(x)
+}

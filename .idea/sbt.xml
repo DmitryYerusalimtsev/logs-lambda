@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/log-producer" />
             <option value="$PROJECT_DIR$/log-producer/project" />
             <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/speed" />
+            <option value="$PROJECT_DIR$/speed/project" />
             <option value="$PROJECT_DIR$/utils" />
             <option value="$PROJECT_DIR$/utils/project" />
           </set>

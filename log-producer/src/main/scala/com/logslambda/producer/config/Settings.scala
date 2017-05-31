@@ -10,7 +10,9 @@ object Settings {
   lazy val timeMultiplier = logGen.getInt("time_multiplier")
   lazy val pages = logGen.getInt("pages")
   lazy val visitors = logGen.getInt("visitors")
-  lazy val filePath = logGen.getString("file_path")
   lazy val productsFile = logGen.getString("products_file")
   lazy val referrersFile = logGen.getString("referrers_file")
+  lazy val filePath = logGen.getString("file_path")
+  lazy val destPath = logGen.getString("dest_path")
+  lazy val numberOfFiles = logGen.getInt("number_of_files")
 }

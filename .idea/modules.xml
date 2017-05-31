@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logProducer-build.iml" filepath="$PROJECT_DIR$/.idea/modules/logProducer-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logs-lambda.iml" filepath="$PROJECT_DIR$/.idea/modules/logs-lambda.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logs-lambda-build.iml" filepath="$PROJECT_DIR$/.idea/modules/logs-lambda-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/speed/speed.iml" filepath="$PROJECT_DIR$/speed/speed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/speed-build.iml" filepath="$PROJECT_DIR$/.idea/modules/speed-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils-build.iml" filepath="$PROJECT_DIR$/.idea/modules/utils-build.iml" />
     </modules>

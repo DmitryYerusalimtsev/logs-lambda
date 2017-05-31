@@ -9,16 +9,20 @@ lazy val commonSettings = Seq(
 val sparkVersion = "1.6.0"
 
 val sparkDependencies = Seq(
-  "org.apache.spark" % "spark-core_2.11" % sparkVersion,
-  "org.apache.spark" % "spark-sql_2.11" % sparkVersion
+  "org.apache.spark" % "spark-core_2.11" % sparkVersion % "provided",
+  "org.apache.spark" % "spark-sql_2.11" % sparkVersion % "provided",
+  "org.apache.spark" % "spark-streaming_2.11" % sparkVersion
 )
+
+val tsConfig = "com.typesafe" % "config" % "1.3.1"
 
 lazy val logProducer = (project in file("log-producer"))
   .settings(
     commonSettings,
 
     libraryDependencies ++= Seq(
-      "com.typesafe" % "config" % "1.3.1"
+      tsConfig,
+      "commons-io" % "commons-io" % "2.4"
     )
   )
 
@@ -29,13 +33,21 @@ lazy val utils = (project in file("utils"))
     libraryDependencies ++= sparkDependencies
   )
 
-
 lazy val batch = (project in file("batch"))
   .settings(
     commonSettings,
 
     libraryDependencies ++= sparkDependencies ++ Seq(
-      "com.typesafe" % "config" % "1.3.1"
+      tsConfig
+    )
+  ).dependsOn(utils)
+
+lazy val speed = (project in file("speed"))
+  .settings(
+    commonSettings,
+
+    libraryDependencies ++= sparkDependencies ++ Seq(
+      tsConfig
     )
   ).dependsOn(utils)
 

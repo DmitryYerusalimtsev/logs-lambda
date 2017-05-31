@@ -16,6 +16,13 @@ val sparkDependencies = Seq(
 
 val tsConfig = "com.typesafe" % "config" % "1.3.1"
 
+lazy val core = (project in file("core"))
+  .settings(
+    commonSettings,
+
+    libraryDependencies ++= sparkDependencies
+  )
+
 lazy val logProducer = (project in file("log-producer"))
   .settings(
     commonSettings,
@@ -40,7 +47,7 @@ lazy val batch = (project in file("batch"))
     libraryDependencies ++= sparkDependencies ++ Seq(
       tsConfig
     )
-  ).dependsOn(utils)
+  ).dependsOn(core, utils)
 
 lazy val speed = (project in file("speed"))
   .settings(
@@ -49,7 +56,7 @@ lazy val speed = (project in file("speed"))
     libraryDependencies ++= sparkDependencies ++ Seq(
       tsConfig
     )
-  ).dependsOn(utils)
+  ).dependsOn(core, utils)
 
 
 assemblyMergeStrategy in assembly := {

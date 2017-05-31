@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/batch/batch.iml" filepath="$PROJECT_DIR$/batch/batch.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/batch-build.iml" filepath="$PROJECT_DIR$/.idea/modules/batch-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-build.iml" filepath="$PROJECT_DIR$/.idea/modules/core-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logProducer.iml" filepath="$PROJECT_DIR$/.idea/modules/logProducer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logProducer-build.iml" filepath="$PROJECT_DIR$/.idea/modules/logProducer-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/logs-lambda.iml" filepath="$PROJECT_DIR$/.idea/modules/logs-lambda.iml" />

@@ -1,6 +1,6 @@
-package com.logslambda.batch.providers
+package com.logslambda.core.providers
 
-import com.logslambda.batch.domain.Activity
+import com.logslambda.core.domain.Activity
 import org.apache.spark.rdd.RDD
 
 object RddProvider {

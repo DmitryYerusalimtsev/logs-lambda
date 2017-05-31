@@ -9,6 +9,8 @@ object StreamingJob {
   def main(args: Array[String]): Unit = {
     val sc = getSparkContext("Logs lambda speed")
 
+    implicit val sqlContext = getSQLContext(sc)
+
     val batchDuration = Seconds(Settings.batchDuration)
 
     val ssc = getStreamingContext(streamingApp, sc,batchDuration)

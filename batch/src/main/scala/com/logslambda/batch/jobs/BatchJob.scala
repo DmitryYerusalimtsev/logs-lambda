@@ -1,7 +1,7 @@
 package com.logslambda.batch.jobs
 
 import com.logslambda.batch.config.Settings
-import com.logslambda.batch.providers.RddProvider
+import com.logslambda.core.providers.RddProvider
 import com.logslambda.utils.SparkUtils._
 
 object BatchJob {

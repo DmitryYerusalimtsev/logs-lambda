@@ -22,6 +22,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: aopalliance:aopalliance:1.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.twitter:algebird-core_2.11:0.11.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.googlecode.javaewah:JavaEWAH:0.6.6:jar" level="project" />
     <orderEntry type="library" name="SBT: asm:asm:3.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.clearspring.analytics:stream:2.7.0:jar" level="project" />
     <orderEntry type="library" name="SBT: com.esotericsoftware.kryo:kryo:2.21:jar" level="project" />

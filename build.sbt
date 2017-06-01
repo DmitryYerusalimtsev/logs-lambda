@@ -14,13 +14,14 @@ val sparkDependencies = Seq(
   "org.apache.spark" % "spark-streaming_2.11" % sparkVersion
 )
 
+val algebird = "com.twitter" % "algebird-core_2.11" % "0.11.0"
 val tsConfig = "com.typesafe" % "config" % "1.3.1"
 
 lazy val core = (project in file("core"))
   .settings(
     commonSettings,
 
-    libraryDependencies ++= sparkDependencies
+    libraryDependencies ++= sparkDependencies ++ Seq(algebird)
   )
 
 lazy val logProducer = (project in file("log-producer"))
@@ -53,9 +54,7 @@ lazy val speed = (project in file("speed"))
   .settings(
     commonSettings,
 
-    libraryDependencies ++= sparkDependencies ++ Seq(
-      tsConfig
-    )
+    libraryDependencies ++= sparkDependencies ++ Seq(tsConfig, algebird)
   ).dependsOn(core, utils)
 
 

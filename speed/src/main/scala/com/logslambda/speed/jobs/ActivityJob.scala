@@ -1,18 +1,28 @@
 package com.logslambda.speed.jobs
 
-import com.logslambda.core.domain.ActivityByProduct
+import com.logslambda.core.domain.{ActivityByProduct, VisitorsByProduct}
 import com.logslambda.core.providers.RddProvider
 import org.apache.spark.sql.SQLContext
+import org.apache.spark.streaming.{Minutes, Seconds, StateSpec}
 import org.apache.spark.streaming.dstream.DStream
+import com.logslambda.core.functions._
+import com.twitter.algebird.HyperLogLogMonoid
 
 class ActivityJob(textDStream: DStream[String])(implicit sqlContext: SQLContext) {
 
-  val activityStream = textDStream.transform(input => RddProvider.getActivityRDD(input))
+  val activityStream = textDStream
+    .transform(input => RddProvider.getActivityRDD(input))
+    .cache()
 
   import sqlContext.implicits._
 
   def start(): Unit = {
-    activityStream.transform(rdd => {
+
+    val activityStateSpec = StateSpec
+      .function(mapActivityStateFunc)
+      .timeout(Minutes(120))
+
+    val statefulActivityByProduct = activityStream.transform(rdd => {
       val df = rdd.toDF()
       df.registerTempTable("activity")
 
@@ -32,6 +42,29 @@ class ActivityJob(textDStream: DStream[String])(implicit sqlContext: SQLContext)
           (key, value)
         }
       }
-    }).print()
+    }).mapWithState(activityStateSpec)
+
+    val activityStateSnapshot = statefulActivityByProduct.stateSnapshots()
+    activityStateSnapshot.reduceByKeyAndWindow((_, b) => b, (x, _) => x, Seconds(30 / 4 * 4))
+      .foreachRDD(rdd => rdd.map(sr =>
+        ActivityByProduct(sr._1._1, sr._1._2, sr._2._1, sr._2._2, sr._2._3)
+      ).toDF().registerTempTable("activity_by_product"))
+
+    // Unique visitors by product
+    val visitorStateSpec = StateSpec
+      .function(mapVisitorsStateSpec)
+      .timeout(Minutes(120))
+
+    val hll = new HyperLogLogMonoid(12)
+    val statefulVisitorsByProduct = activityStream.map(a => {
+      ((a.product, a.timestamp_hour), hll(a.visitor.getBytes))
+    }).mapWithState(visitorStateSpec)
+
+    val visitorStateSnapshot = statefulVisitorsByProduct.stateSnapshots()
+    visitorStateSnapshot
+      .reduceByKeyAndWindow((_, b) => b, (x, _) => x, Seconds(30 / 4 * 4))
+      .foreachRDD(rdd => rdd.map(sr =>
+        VisitorsByProduct(sr._1._1, sr._1._2, sr._2.approximateSize.estimate))
+        .toDF().registerTempTable("visitors_by_product"))
   }
 }

@@ -4,8 +4,8 @@ import com.typesafe.config.ConfigFactory
 
 object Settings {
   private val config = ConfigFactory.load()
-  private val logGen = config.getConfig("batch")
+  private val batch = config.getConfig("batch")
 
-  lazy val filePath = logGen.getString("file_path")
-  lazy val hdfsPath = logGen.getString("hdfs_path")
+  lazy val hdfsPath = batch.getString("hdfs_path")
+  lazy val hdfsLogsPath = batch.getString("hdfs_logs_path")
 }

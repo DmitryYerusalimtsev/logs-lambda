@@ -4,18 +4,21 @@ import com.logslambda.core.domain.{ActivityByProduct, VisitorsByProduct}
 import com.logslambda.core.providers.RddProvider
 import com.logslambda.core.functions._
 import com.logslambda.speed.kafka.KafkaConsumer
+import com.logslambda.speed.storage.HdfsWriter
 import com.twitter.algebird.HyperLogLogMonoid
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.streaming.{Minutes, Seconds, StateSpec, StreamingContext}
 
-class ActivityJob(implicit val ssc: StreamingContext, sqlContext: SQLContext)
-  extends KafkaConsumer {
+class ActivityJob(implicit val ssc: StreamingContext, val sqlContext: SQLContext)
+  extends KafkaConsumer with HdfsWriter {
+
+  import sqlContext.implicits._
 
   val activityStream = kafkaStream
     .transform(input => RddProvider.getActivityRDD(input))
     .cache()
 
-  import sqlContext.implicits._
+  writeToHdfs()
 
   def start(): Unit = {
 

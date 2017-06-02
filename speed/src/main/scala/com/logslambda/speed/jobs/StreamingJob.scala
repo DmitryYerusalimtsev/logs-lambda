@@ -2,8 +2,7 @@ package com.logslambda.speed.jobs
 
 import com.logslambda.speed.config.Settings
 import com.logslambda.utils.SparkUtils._
-import org.apache.spark.SparkContext
-import org.apache.spark.streaming.{Duration, Seconds, StreamingContext}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 object StreamingJob {
   def main(args: Array[String]): Unit = {
@@ -12,20 +11,12 @@ object StreamingJob {
     implicit val sqlContext = getSQLContext(sc)
 
     val batchDuration = Seconds(Settings.Speed.batchDuration)
-    implicit val ssc = getStreamingContext(streamingApp, sc, batchDuration)
+    implicit val ssc = new StreamingContext(sc, batchDuration)
 
     val activityJob = new ActivityJob()
+    activityJob.start()
 
     ssc.start()
     ssc.awaitTermination()
-  }
-
-  def streamingApp(sc: SparkContext, batchDuration: Duration) = {
-    val ssc = new StreamingContext(sc, batchDuration)
-
-    val textDStream = ssc.textFileStream(inputPath)
-    textDStream.print()
-
-    ssc
   }
 }

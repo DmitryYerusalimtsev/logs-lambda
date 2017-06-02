@@ -10,10 +10,9 @@ object BatchJob {
     val sc = getSparkContext("Logs lambda batch")
     implicit val sqlContext = getSQLContext(sc)
 
-    import sqlContext.implicits._
-
-    val input = sc.textFile(Settings.filePath)
-    val inputDF = RddProvider.getActivityRDD(input).toDF()
+    // Job runs every 6 hours.
+    val inputDF = sqlContext.read.parquet(Settings.hdfsLogsPath)
+      .where("unix_timestamp() - timestamp_hour / 1000 <= 60 * 60 * 6")
 
     val activityJob = new ActivityJob(inputDF, Settings.hdfsPath)
     activityJob.start()

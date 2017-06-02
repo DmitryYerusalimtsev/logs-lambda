@@ -6,17 +6,7 @@ import org.apache.spark.sql.functions.{add_months, from_unixtime}
 class ActivityJob(inputDF: DataFrame, pathToSave: String)
                  (implicit sqlContext: SQLContext) extends HdfsParquet {
 
-  val df = inputDF.select(
-    add_months(from_unixtime(inputDF("timestamp_hour") / 1000), 1).as("timestamp_hour"),
-    inputDF("referrer"),
-    inputDF("action"),
-    inputDF("prevPage"),
-    inputDF("page"),
-    inputDF("visitor"),
-    inputDF("product")
-  ).cache()
-
-  df.registerTempTable("activity")
+  inputDF.registerTempTable("activity")
 
   override def partitionColumn: String = "timestamp_hour"
 

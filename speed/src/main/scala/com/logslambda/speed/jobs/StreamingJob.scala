@@ -11,20 +11,17 @@ object StreamingJob {
 
     implicit val sqlContext = getSQLContext(sc)
 
-    val batchDuration = Seconds(Settings.batchDuration)
+    val batchDuration = Seconds(Settings.Speed.batchDuration)
+    implicit val ssc = getStreamingContext(streamingApp, sc, batchDuration)
 
-    val ssc = getStreamingContext(streamingApp, sc,batchDuration)
+    val activityJob = new ActivityJob()
+
     ssc.start()
     ssc.awaitTermination()
   }
 
   def streamingApp(sc: SparkContext, batchDuration: Duration) = {
     val ssc = new StreamingContext(sc, batchDuration)
-
-    val inputPath = isIDE match {
-      case true => Settings.inputPathIDE
-      case false => Settings.inputPath
-    }
 
     val textDStream = ssc.textFileStream(inputPath)
     textDStream.print()

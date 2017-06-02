@@ -11,7 +11,13 @@ val sparkVersion = "1.6.0"
 val sparkDependencies = Seq(
   "org.apache.spark" % "spark-core_2.11" % sparkVersion % "provided",
   "org.apache.spark" % "spark-sql_2.11" % sparkVersion % "provided",
-  "org.apache.spark" % "spark-streaming_2.11" % sparkVersion
+  "org.apache.spark" % "spark-streaming_2.11" % sparkVersion,
+  "org.apache.spark" % "spark-streaming-kafka_2.11" % sparkVersion
+)
+
+val kafkaDependencies = Seq(
+  "org.apache.kafka" % "kafka_2.11" % "0.8.2.1",
+  "org.apache.kafka" % "kafka-clients" % "0.8.2.1"
 )
 
 val algebird = "com.twitter" % "algebird-core_2.11" % "0.11.0"
@@ -28,7 +34,7 @@ lazy val logProducer = (project in file("log-producer"))
   .settings(
     commonSettings,
 
-    libraryDependencies ++= Seq(
+    libraryDependencies ++= kafkaDependencies ++ Seq(
       tsConfig,
       "commons-io" % "commons-io" % "2.4"
     )

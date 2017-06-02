@@ -22,6 +22,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="utils" exported="" />
+    <orderEntry type="library" name="SBT: org.apache.zookeeper:zookeeper:3.4.6:jar" level="project" />
+    <orderEntry type="library" name="SBT: net.sf.jopt-simple:jopt-simple:3.2:jar" level="project" />
     <orderEntry type="module" module-name="core" exported="" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.codehaus.janino:janino:2.7.8:jar" level="project" />
@@ -124,7 +126,6 @@
     <orderEntry type="library" name="SBT: org.apache.spark:spark-streaming_2.11:1.6.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.apache.spark:spark-unsafe_2.11:1.6.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.apache.xbean:xbean-asm5-shaded:4.4:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.apache.zookeeper:zookeeper:3.4.5:jar" level="project" />
     <orderEntry type="library" name="SBT: org.codehaus.jackson:jackson-core-asl:1.9.13:jar" level="project" />
     <orderEntry type="library" name="SBT: org.codehaus.jackson:jackson-jaxrs:1.8.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.codehaus.jackson:jackson-mapper-asl:1.9.13:jar" level="project" />
@@ -161,5 +162,10 @@
     <orderEntry type="library" name="SBT: xmlenc:xmlenc:0.52:jar" level="project" />
     <orderEntry type="library" name="SBT: com.googlecode.javaewah:JavaEWAH:0.6.6:jar" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:algebird-core_2.11:0.11.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.101tec:zkclient:0.3:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.yammer.metrics:metrics-core:2.2.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.kafka:kafka-clients:0.8.2.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.kafka:kafka_2.11:0.8.2.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.spark:spark-streaming-kafka_2.11:1.6.0:jar" level="project" />
   </component>
 </module>

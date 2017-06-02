@@ -2,15 +2,16 @@ package com.logslambda.speed.jobs
 
 import com.logslambda.core.domain.{ActivityByProduct, VisitorsByProduct}
 import com.logslambda.core.providers.RddProvider
-import org.apache.spark.sql.SQLContext
-import org.apache.spark.streaming.{Minutes, Seconds, StateSpec}
-import org.apache.spark.streaming.dstream.DStream
 import com.logslambda.core.functions._
+import com.logslambda.speed.kafka.KafkaConsumer
 import com.twitter.algebird.HyperLogLogMonoid
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.streaming.{Minutes, Seconds, StateSpec, StreamingContext}
 
-class ActivityJob(textDStream: DStream[String])(implicit sqlContext: SQLContext) {
+class ActivityJob(implicit val ssc: StreamingContext, sqlContext: SQLContext)
+  extends KafkaConsumer {
 
-  val activityStream = textDStream
+  val activityStream = kafkaStream
     .transform(input => RddProvider.getActivityRDD(input))
     .cache()
 

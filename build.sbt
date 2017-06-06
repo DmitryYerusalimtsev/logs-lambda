@@ -20,6 +20,11 @@ val kafkaDependencies = Seq(
   "org.apache.kafka" % "kafka-clients" % "0.8.2.1"
 )
 
+val cassandraDependencies = Seq(
+  "com.datastax.cassandra" % "cassandra-driver-core" % "3.0.1",
+  "com.datastax.spark" % "spark-cassandra-connector_2.11" % "1.6.1"
+)
+
 val algebird = "com.twitter" % "algebird-core_2.11" % "0.11.0"
 val tsConfig = "com.typesafe" % "config" % "1.3.1"
 
@@ -51,7 +56,9 @@ lazy val batch = (project in file("batch"))
   .settings(
     commonSettings,
 
-    libraryDependencies ++= sparkDependencies ++ Seq(
+    libraryDependencies ++= sparkDependencies
+      ++ cassandraDependencies
+      ++ Seq(
       tsConfig
     )
   ).dependsOn(core, utils)
@@ -60,7 +67,9 @@ lazy val speed = (project in file("speed"))
   .settings(
     commonSettings,
 
-    libraryDependencies ++= sparkDependencies ++ Seq(tsConfig, algebird)
+    libraryDependencies ++= sparkDependencies
+      ++ cassandraDependencies
+      ++ Seq(tsConfig, algebird)
   ).dependsOn(core, utils)
 
 

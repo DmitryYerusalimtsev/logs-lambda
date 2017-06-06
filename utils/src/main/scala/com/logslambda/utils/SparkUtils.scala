@@ -15,6 +15,7 @@ object SparkUtils {
   private def getSparkConfiguration(appName: String): SparkConf = {
     val conf = new SparkConf()
       .setAppName(appName)
+      .set("spark.cassandra.connection.host", "localhost")
 
     if (isIDE) {
       System.setProperty("hadoop.home.dir", "C:\\Libraries\\WinUtils")

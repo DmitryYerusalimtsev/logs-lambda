@@ -1,10 +1,11 @@
 package com.logslambda.batch.jobs
 
+import com.logslambda.batch.config.Settings
+import com.logslambda.batch.storage.{Cassandra, HdfsParquet}
 import org.apache.spark.sql.{DataFrame, SQLContext}
-import org.apache.spark.sql.functions.{add_months, from_unixtime}
 
 class ActivityJob(inputDF: DataFrame, pathToSave: String)
-                 (implicit sqlContext: SQLContext) extends HdfsParquet {
+                 (implicit sqlContext: SQLContext) extends HdfsParquet with Cassandra {
 
   inputDF.registerTempTable("activity")
 
@@ -27,9 +28,8 @@ class ActivityJob(inputDF: DataFrame, pathToSave: String)
       """.stripMargin).cache()
 
     // Save results to HDFS.
-    save(activityByProduct, pathToSave);
-
-    visitorsByProduct.foreach(println)
-    activityByProduct.foreach(println)
+    saveToHdfs(activityByProduct, pathToSave)
+    saveToCassandra(visitorsByProduct, Settings.Cassandra.visitorsByProductTable)
+    saveToCassandra(activityByProduct, Settings.Cassandra.activityByProductTable)
   }
 }

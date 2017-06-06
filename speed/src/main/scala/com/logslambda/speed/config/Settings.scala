@@ -21,4 +21,11 @@ object Settings {
     lazy val offsetReset = kafka.getString("offset_reset")
   }
 
+  object Cassandra {
+    private val cassandra = config.getConfig("cassandra")
+
+    lazy val keyspace = cassandra.getString("keyspace")
+    lazy val activityByLogTable = cassandra.getString("activity_by_log_table")
+  }
+
 }
